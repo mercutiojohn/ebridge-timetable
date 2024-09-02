@@ -36,3 +36,19 @@ console.log(calendar.toLines());
 
 Deno.writeTextFileSync('test.ics', calendar.toString());
 ```
+
+### Build Docker Image & Run
+
+build
+
+```bash
+docker build -t ebridge-timetable-api .
+```
+
+run
+
+```bash
+docker run -p 8000:8000 ebridge-timetable-api
+```
+
+Now api service will run on <http://localhost:8000>.
