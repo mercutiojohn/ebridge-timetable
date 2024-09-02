@@ -4,7 +4,7 @@ import { DOMParser, genCalendar, parseTimetable } from "./mod.ts";
 const app = new Application();
 const router = new Router();
 
-router.post("/parse-and-generate", async (ctx) => {
+router.post("/calendar-parse", async (ctx) => {
   const body = ctx.request.body();
 
   if (body.type !== "text") {

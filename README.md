@@ -52,3 +52,10 @@ docker run -p 8000:8000 ebridge-timetable-api
 ```
 
 Now api service will run on <http://localhost:8000>.
+You can also use docker compose by typing `docker-compose up`.
+
+### Api Test
+
+```bash
+curl -X POST -H "Content-Type: text/plain" --data-binary @"XJTLU e-Bridge.html" http://localhost:8000/parse-and-generate > result.json
+```
