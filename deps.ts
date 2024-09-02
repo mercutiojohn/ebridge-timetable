@@ -10,3 +10,5 @@ export type {
 } from "https://deno.land/x/simple_ics@0.1.0/mod.ts";
 
 export { Calendar, Event } from "https://deno.land/x/simple_ics@0.0.11/mod.ts";
+
+export { config } from "https://deno.land/x/dotenv/mod.ts";

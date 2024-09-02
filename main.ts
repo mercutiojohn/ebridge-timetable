@@ -1,7 +1,12 @@
 import { Calendar, Day, Event, EventConfig, RecurrenceRule } from "./deps.ts";
 import { Lesson } from "./parser.ts";
+import { config } from "./deps.ts";
 
-const WEEK1_FIRST_DAY = [2023, 1, 13];
+await config(); // 加载 .env 文件并设置环境变量
+
+const week1FirstDayEnv = Deno.env.get("WEEK1_FIRST_DAY");
+
+const WEEK1_FIRST_DAY = week1FirstDayEnv ? week1FirstDayEnv.split("-").map((item, index) => index === 1 ? parseInt(item) - 1 : parseInt(item)) : [2024, 8, 9];
 
 const getMondayOfWeek = (n: number) => {
   const [year, month, date] = WEEK1_FIRST_DAY;
@@ -24,6 +29,8 @@ const getDayCode = (day: Day) => {
       return 5;
     case "SU":
       return 6;
+    default:
+      throw new Error('invalid day code')
   }
 };
 
@@ -60,7 +67,7 @@ export function genCalendar(lessons: { [title: string]: Lesson }) {
         until: weekDuration.length >= 2
           ? new Date(
             firstMonday.getTime() +
-              86400 * 7e3 * (weekDuration[1] - weekDuration[0] + 1),
+            86400 * 7e3 * (weekDuration[1] - weekDuration[0] + 1),
           )
           : new Date(firstMonday.getTime() + 86400 * 7e3),
       };
